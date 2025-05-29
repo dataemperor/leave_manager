@@ -4,7 +4,7 @@ import datetime
 class Employee:
 
     def __init__(self, employee_name, employee_leave_balance: dict,
-                 employee_leave_history: datetime.date):
+                 employee_leave_history: list['Leave']):
         self.employee_name = employee_name
         self.employee_leave_balance = employee_leave_balance
         self.employee_leave_history = employee_leave_history
@@ -21,15 +21,26 @@ class Employee:
     def leave_history(self):
         return self.employee_leave_history
 
+    def add_leave(self, leave_type, leave_date):
+        new_leave = Leave(leave_type, leave_date)
+        self.leave_history.append(new_leave)
+
 
 class Leave:
     LEAVE_TYPES = {'sick', 'annual', 'maternity'}
+    LEAVE_STATUS_TYPES = {'pending', 'approved', 'denied', 'cancelled'}
 
-    def __init__(self, leave_type: str, leave_date: datetime.date):
+    def __init__(self, leave_type: str, leave_date: datetime.date,
+                 leave_status='pending'):
         if leave_type not in self.LEAVE_TYPES:
             raise ValueError(f"attribute leave_type cannot be {leave_type}")
+
+        if leave_status not in self.LEAVE_STATUS_TYPES:
+            raise ValueError(f"attribute leave_type cannot be {leave_status}")
+
         self.leave_type = leave_type
         self.leave_date = leave_date
+        self.leave_status = leave_status
 
     @property
     def type(self):
@@ -38,5 +49,5 @@ class Leave:
 
     @property
     def date(self):
-        """Get leave date"""
+        """Get leavedate"""
         return self.leave_date
