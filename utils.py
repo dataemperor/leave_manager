@@ -1,5 +1,6 @@
 import datetime
 import re
+from employee import Leave
 
 
 def parse_date_natural_language(date_string: str) -> datetime.date | None:
@@ -49,3 +50,21 @@ def parse_date_natural_language(date_string: str) -> datetime.date | None:
 
     print(f"Couldn't pass through {date_string} ")
     return None
+
+
+def format_date(raw_date: datetime.date) -> str:
+    """Formats a datetime.date object into a string"""
+
+    return raw_date.strftime("%B %d, %Y")
+
+
+def get_current_year() -> int:
+    return datetime.date.today().year
+
+
+def get_leave_types() -> set[str]:
+    return Leave._LEAVE_TYPES
+
+
+def get_leave_status_types() -> set[str]:
+    return Leave._LEAVE_STATUS_TYPES
