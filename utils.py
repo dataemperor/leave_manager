@@ -19,8 +19,8 @@ def parse_date_natural_language(date_string: str) -> datetime.date | None:
         pass
 
     weekdays = {
-        "sunday": 0, "monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4,
-        "friday": 5, "saturday": 6
+        "sunday": 6, "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+        "friday": 4, "saturday": 5
     }
 
     # specific day in a week
