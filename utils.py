@@ -43,7 +43,14 @@ def parse_date_natural_language(date_string: str) -> datetime.date | None:
         month_num = month_map.get(month_name)
         if month_num:
             try:
-                return datetime.date(current_year, month_num, int(day_str))
+                parsed_date = datetime.date(
+                    current_year, month_num, int(day_str))
+                if parsed_date < today and parsed_date != today:
+                    try:
+                        return datetime.date(current_year + 1, month_num, int(day_str))
+                    except ValueError:
+                        pass
+                return parsed_date
             except ValueError:
                 # TODO:Custom error
                 pass
